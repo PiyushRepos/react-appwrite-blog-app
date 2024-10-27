@@ -24,7 +24,7 @@ export class AuthService {
         return this.login({ email, password });
       }
     } catch (error) {
-      console.log("Appwrite Error:: createAccount :: AuthSlice ", error);
+      console.error("Appwrite Error:: createAccount :: AuthSlice ", error);
     }
   }
 
@@ -32,7 +32,7 @@ export class AuthService {
     try {
       return await this.account.createEmailPasswordSession(email, password);
     } catch (error) {
-      console.log("Appwrite Error:: login :: AuthSlice ", error);
+      console.error("Appwrite Error:: login :: AuthSlice ", error);
     }
   }
 
@@ -40,7 +40,7 @@ export class AuthService {
     try {
       return await this.account.get();
     } catch (error) {
-      console.log("Appwrite Error:: getCurrentUser :: AuthSlice ", error);
+      console.error("Appwrite Error :: getCurrentUser :: AuthSlice", error);
     }
 
     return null;
@@ -50,7 +50,7 @@ export class AuthService {
     try {
       await this.account.deleteSessions();
     } catch (error) {
-      console.log("Appwrite Error:: logout :: AuthSlice ", error);
+      console.error("Appwrite Error:: logout :: AuthSlice ", error);
     }
   }
 }

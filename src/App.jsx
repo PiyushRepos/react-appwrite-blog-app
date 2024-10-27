@@ -1,13 +1,35 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import { conf } from "./conf/conf";
+import { useDispatch } from "react-redux";
+import authService from "./appwrite/auth";
+import { login, logout } from "./redux/authSlice";
+import { Header, Footer } from "./components/index";
 
 function App() {
-  console.log(conf.APPWRITE_COLLECTION_ID);
-  return (
-    <>
-      <h1>Hello world</h1>
-    </>
-  );
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    authService
+      .getCurrentUser()
+      .then((user) => {
+        if (user) {
+          dispatch(login(user));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  return !loading ? (
+    <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
+      <div className="w-full block">
+        <Header />
+        <Footer />
+      </div>
+    </div>
+  ) : null;
 }
 
 export default App;
