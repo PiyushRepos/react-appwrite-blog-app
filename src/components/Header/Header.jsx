@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Header() {
-  const authStatus = useSelector((state) => state.auth.status);
+  const authStatus = useSelector((state) => state.status);
 
   const navigate = useNavigate();
 
@@ -39,13 +39,13 @@ function Header() {
   return (
     <header className="py-3 shadow bg-gray-500">
       <Container>
-        <nav className="flex ml-auto">
+        <nav className="flex items-center justify-between ml-auto">
           <div className="mr-4">
             <Link to="/">
               <Logo />
             </Link>
           </div>
-          <ul>
+          <ul className="flex">
             {navItems.map(
               (item) =>
                 item.active && (
